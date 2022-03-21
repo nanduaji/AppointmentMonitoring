@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" 
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{_layout}">
+
+<body>
+
+ <div layout:fragment="content">
+    
+<div id="main" class="container-fluid">
+
+  <h2 class="form-heading">Create New Employee</h2>
+  <p></p>
+  
+  <form th:action="@{/AddEmployee}" th:object="${employee}" method="post">
+  
+  <div class="row justify-content-center">
+ 		 <div class="form-group col-4" style="display: none;">
+  			<label id="lbl_employeecode" class="control-label">Employee code</label>
+  		 </div>
+   		 <div class=" col-4" style="display: none;">
+  			 <input id="id" type="number" th:field="*{employeeCode}" class="form-control">
+   		</div>
+  	</div>
+    <div class="row justify-content-center">
+    	<div class="form-group col-4">
+    		<label for="EmployeeNameEng" id="lbl_EmployeeNameEng" class="control-label">Employee Name</label>
+   		 </div> 
+    	<div class=" col-4">
+    	<input id="EmployeeNameEng" name="EmployeeNameEng" type="text" th:field="*{employeeNameEng}"  required="required" class="form-control">
+    	<ul>
+        	<li th:each="err : ${#fields.errors('employeeNameEng')}" th:text="${err}" class="error" />
+   			 </ul>
+    	</div>
+    </div> 
+    <div class="row justify-content-center">
+    	<div class="form-group col-4">
+    		<label for="EmployeeNameMal" id="lbl_EmployeeNameMal" class="control-label">Employee Name(Mal)</label>
+   		 </div> 
+    	<div class=" col-4">
+    	<input id="EmployeeNameMal" name="EmployeeNameMal" type="text" th:field="*{employeeNameMal}"  required="required" class="form-control">
+    	<ul>
+        	<li th:each="err : ${#fields.errors('employeeNameMal')}" th:text="${err}" class="error" />
+   			 </ul>
+    	</div>
+    </div> 
+     <div class="row justify-content-center">
+    	<div class="form-group col-4">
+    		<label for="EmployeeDesignation" id="lbl_EmployeeDesignation" class="control-label">Employee Designation</label>
+   		 </div> 
+    	<div class=" col-4">
+    	<input id="EmployeeDesignation" name="EmployeeDesignation" type="text" th:field="*{designationEng}"  required="required" class="form-control">
+    	<ul>
+        	<li th:each="err : ${#fields.errors('designationEng')}" th:text="${err}" class="error" />
+   			 </ul>
+    	</div>
+    </div> 
+    <div class="row justify-content-center">
+    	<div class="form-group col-4">
+    		<label for="DesignationMal" id="lbl_DesignationMal" class="control-label">Employee Designation(Mal)</label>
+   		 </div> 
+    	<div class=" col-4">
+    	<input id="DesignationMal" name="DesignationMal" type="text" th:field="*{designationMal}"  required="required" class="form-control">
+    	<ul>
+        	<li th:each="err : ${#fields.errors('designationMal')}" th:text="${err}" class="error" />
+   			 </ul>
+    	</div>
+    </div> 
+    <div class="row justify-content-center">
+    	<div class="form-group col-4">
+    		<label for="EmployeeDesignation" id="lbl_EmployeeDesignation" class="control-label">District</label>
+   		 </div> 
+    	<div class="col-4">
+    		<select name="districtId" id="districtId" class="form-control"  required>
+    		<option disabled selected="true" value="${district.districtId}">--Select District--</option>
+    		<option th:each="district : ${districtlist}" 
+    				th:text="${district.districtCode}+ '-' +${district.districtNameEng}" 
+    				th:value="${district.districtId}" ></option>
+     		
+ 			</select>
+ 			
+    	</div>
+    </div> 
+     <div class="row justify-content-center">
+    	<div class="form-group col-4">
+    		<label for="fromdate" id="lbl_fromdate" class="control-label">Posting from date</label>
+   		 </div> 
+    	<div class=" col-4">
+    	<input id="fromdate" name="fromdate" type="date" th:field="*{postingFromDate}"  required="required" class="form-control">
+    	<ul>
+        	<li th:each="err : ${#fields.errors('postingFromDate')}" th:text="${err}" class="error" />
+   			 </ul>
+    	</div>
+    </div> 
+     <div class="row justify-content-center">
+    	<div class="form-group col-4">
+    		<label for="todate" id="lbl_todate" class="control-label">Posting to date</label>
+   		 </div> 
+    	<div class=" col-4">
+    	<input id="todate" name="todate" type="date" th:field="*{postingToDate}"  required="required" class="form-control">
+    	<ul>
+        	<li th:each="err : ${#fields.errors('postingToDate')}" th:text="${err}" class="error" />
+   			 </ul>
+    	</div>
+    </div> 
+      <div class="row justify-content-center">
+    	<div class="form-group col-4">
+    		<label for="password" id="lbl_password" class="control-label">Password</label>
+   		 </div> 
+    	<div class=" col-4">
+    	<input id="password" name="password" type="password" th:field="*{password}"  required="required" class="form-control">
+    	<ul>
+        	<li th:each="err : ${#fields.errors('password')}" th:text="${err}" class="error" />
+   			 </ul>
+    	</div>
+    </div>
+   
+    
+ 
+    <div class="row justify-content-center">
+    <div class=" col-sm-12 text-center">
+    <input type="submit" value="Create" class="btn btn-primary">
+     <a th:href="@{/employeelist}" class="btn btn-danger btn-md center-block"> Cancel </a>
+     </div>
+     </div>
+    
+    
+     
+ </form>
+    
+  
+  </div>
+  
+</div>
+
+     
+</body>
+
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" 
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{_layout}">
+<head>
+<script>
+function status(){
+	
+	var btn = document.getElementById('statusButton');
+	if(btn.value === "Active"){
+		btn.style.backgroundColor = 'Red'; 
+		btn.style.borderColor = 'Red';
+		btn.style.boxShadow = "0px 0px 0px Red";
+		btn.value = "Inactive";
+    }else{
+    	btn.style.backgroundColor = 'green'; 
+    	btn.style.borderColor = 'green';
+    	btn.style.boxShadow = "0px 0px 0px green";
+    	btn.value= "Active";
+    } 
+}
+</script>
+</head>
+<body>
+
+ <div layout:fragment="content">
+  <p><a th:href="@{/ViewEmployeeAddForm}" id="addbtn" class="btn btn-primary "> <span class="addfolder"><i class="fa fa-folder"></i></span>Create New </a></p>
+  <h2 class="form-heading">Users</h2>    
+    <div>
+        <table class="table table-striped table-bordered" style="width: 100%;">
+            <thead >
+                <tr>
+                
+                    <th>Employee code</th>
+                    <th>Name</th>
+                    <th>Designation</th>
+                   <!--     <th>District</th> -->
+                     <th>Status</th>
+                     <th>Lock/Unlock</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="employee: ${listemployee}">
+                  
+                    <td th:text="${employee.employeeCode}">Employee Code</td>
+                    <td th:text="${employee.employeeNameEng}">Name</td>
+                    <td th:text="${employee.designationEng}">Designation</td>
+                  <!--     <td th:text="${employee.districtId.districtNameEng}">District</td>-->
+                    <td>
+                    
+                    <span style="color: green;" th:if="${employee.status == 'Active'}">Active</span>
+                     <span style="color: Red;" th:if="${employee.status == 'InActive'}">InActive</span>
+                    </td>
+                    
+                   
+                    <td>
+                    <div th:if="${employee.status == 'Active'}">
+                    
+                    <button type="button" id="statusActiveButton" class="btn btn-danger" th:onclick="|window.location.href='/Deactivate/${employee.employeeCode}'|"> DeActivate</button>
+                     
+                    
+                     </div>                    
+                     <div th:if="${employee.status == 'InActive'}">
+                     <button type="button" id="statusActiveButton" class="btn btn-success" th:onclick="|window.location.href='/Activate/${employee.employeeCode}'|"> Activate</button>
+                 
+                     </div>
+                    </td>
+                     
+                     <td><button type="button" class="btn btn-primary" th:onclick="|window.location.href='/employeeView/${employee.employeeCode}'|"> View</button>
+                     <button type="button" class="btn btn-info" th:onclick="|window.location.href='/employeeEdit/${employee.employeeCode}'|"> Edit</button>
+                     <button type="button" class="btn btn-danger" th:onclick="|window.location.href='/employeeDeleteForm/${employee.employeeCode}'|" > Delete</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+     </div>
+</body>
+
+</html>

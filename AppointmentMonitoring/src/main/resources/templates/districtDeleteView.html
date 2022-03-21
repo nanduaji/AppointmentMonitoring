@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" 
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{_layout}">
+
+<body>
+
+ <div layout:fragment="content">
+
+<div id="main" class="container-fluid">
+
+  <h2 class="form-heading"> District Details</h2>
+  <p></p>
+  
+  <form  th:object="${district}" th:method="DELETE">
+  
+   <div class="row justify-content-center">
+ 		 <div class="form-group col-4" style="display: none;">
+  			<label id="lbl_districtId" class="control-label">Id</label>
+  		 </div>
+   		 <div class=" col-4" style="display: none;">
+  			 <input id="districtId" type="number" th:field="${district.districtId}" class="form-control">
+   		</div>
+  	</div>
+  	 <div class="row justify-content-center">
+    <div class="form-group col-4">
+    <label for="Districtcode" id="lbl_Districtcode" class="control-label">District Code</label>
+    </div> 
+    <div class=" col-4">
+    <input id="Districtcode" name="Districtcode" type="text" disabled="disabled" th:field="${district.districtCode}" class="form-control" >
+    </div>
+    </div>
+    
+    <div class="row justify-content-center">
+    	<div class="form-group col-4">
+    		<label for="DistrictNameEng" id="lbl_DistrictNameEng" class="control-label">District Name(Eng)</label>
+   		 </div> 
+    	<div class=" col-4">
+    	<input id="DistrictNameEng" name="DistrictNameEng" type="text" th:field="${district.districtNameEng}"  disabled="disabled" class="form-control">
+    	</div>
+    </div> 
+     <div class="row justify-content-center">
+    	<div class="form-group col-4">
+    		<label for="DistrictNameMal" id="lbl_DistrictNameMal" class="control-label">District Name(Mal)</label>
+   		 </div> 
+    	<div class=" col-4">
+    	<input id="DistrictNameMal" name="DistrictNameMal" type="text" th:field="${district.districtNameMal}" disabled="disabled" class="form-control">
+    	</div>
+    </div> 
+   
+    <div class="row justify-content-center">
+    <div class=" col-sm-12 text-center">
+    
+   	  <button type="button" name="Delete" value="Delete" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal1"> Delete </button>
+ 
+     <a th:href="@{/districtlist}" class="btn btn-primary btn-md center-block"> Cancel </a>
+     
+     </div>
+     </div>
+    
+   <div>
+    <th:block th:replace="_modals ::  modal(id ='exampleModal1',districtId = ${district.get().districtId}) ">modal</th:block>
+   </div>
+     
+ </form>
+    
+  
+  
+  </div>
+</div>
+
+     
+</body>
+
+</html>

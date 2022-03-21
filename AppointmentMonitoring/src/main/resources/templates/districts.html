@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" 
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{_layout}">
+
+<body>
+
+ <div layout:fragment="content">
+  <p><a th:href="@{/ViewDistrictAddForm}" id="addbtn" class="btn btn-primary "> <span class="addfolder"><i class="fa fa-folder"></i></span>Create New </a></p>
+  <h2 class="form-heading">Districts</h2>    
+    <div>
+        <table class="table table-striped table-bordered" style="width: 100%;">
+            <thead >
+                <tr>
+                    
+                    <th>District Code</th>
+                    <th>District (English)</th>
+                    <th>District (Malayalam)</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="district: ${listDistricts}">
+                  
+                    <td th:text="${district.districtCode}">District Code</td>
+                    <td th:text="${district.districtNameEng}">First Name</td>
+                    <td th:text="${district.districtNameMal}">Last Name</td>
+                     <td><button type="button" class="btn btn-primary" th:onclick="|window.location.href='/districtView/${district.districtId}'|"> View</button>
+                     <button type="button" class="btn btn-info" th:onclick="|window.location.href='/districtEdit/${district.districtId}'|"> Edit</button>
+                     <button type="button" class="btn btn-danger" th:onclick="|window.location.href='/districtDeleteForm/${district.districtId}'|" > Delete</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+     </div>
+</body>
+
+</html>

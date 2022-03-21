@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+<!------ Include the above in your HEAD tag ---------->
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+
+<script>
+function validateForm() {
+	alert("Hi");
+  let x = document.forms["registrationform"]["password"].value;
+  let y = document.forms["registrationform"]["confirmpassword"].value;
+  alert(x);
+  if (x!=y) {
+    alert("Password mismatch");
+    return false;
+  }
+}
+</script>
+
+
+<style type="text/css">
+body{
+background-color: #d7f9fb;
+}
+.divider-text {
+    position: relative;
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+.divider-text span {
+    padding: 7px;
+    font-size: 12px;
+    position: relative;   
+    z-index: 2;
+}
+.divider-text:after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    border-bottom: 1px solid #ddd;
+    top: 55%;
+    left: 0;
+    z-index: 1;
+}
+.myform{
+background-color: #13467b;
+color:white;
+ max-width: 530px;
+    padding: 15px;
+    margin: 0 auto;
+    border-radius: 0.3em;
+}
+.control-label{
+text-align:right;
+float:right;
+font-weight:bold;
+}
+.btn-info{
+background-color: #40dfe8;
+    border-color: #40dfe8;
+}
+.error{
+color: red !important;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+	<h4 class="card-title mt-3 text-center">REGISTRATION</h4>
+	
+	<form class="myform form-horizontal" name="registrationform" th:action="@{/public/register}" onsubmit="return validateForm()" th:object="${employee}" method="post" >
+	
+	  <div class="form-group input-group" style="display: none;">
+     <label for="firstName" class="col-sm-4 control-label">Employee Code</label>
+    	<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-id-badge"></i> </span>
+		 </div>
+        <input name="employeeCode" class="form-control" placeholder="Employee code" th:field="*{employeeCode}" type="text">
+    </div>  <!-- form-group// -->
+	
+	<div class="form-group input-group">
+	<label for="firstName" class="col-sm-4 control-label">Employee Name</label>
+		<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+		 </div>
+        <input name="employeeNameEng" class="form-control" placeholder="Employee name" th:field="*{employeeNameEng}" type="text" required="required">
+   
+    </div> <!-- form-group// -->
+     <div> <ul>
+        	<li th:each="err : ${#fields.errors('employeeNameEng')}" th:text="${err}" class="error" />
+   			 </ul>
+   			 </div>
+  
+    <div class="form-group input-group">
+    <label for="firstName" class="col-sm-4 control-label">District Code</label>
+    	<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-user-circle"></i> </span>
+		 </div>
+        <!--  <input name="" class="form-control" placeholder="District code" th:field="*{districtCode}" type="text">-->
+      
+    		<select name="districtId" id="districtId" class="form-control"  required>
+    		<option disabled selected="true" value="${district.districtId}">--Select District--</option>
+    		<option th:each="district : ${districtlist}" 
+    				th:text="${district.districtCode}+ '-' +${district.districtNameEng}" 
+    				th:value="${district.districtId}" ></option>
+     		
+ 			</select>
+    
+    </div> <!-- form-group// -->
+   
+    <div class="form-group input-group">
+    <label for="firstName" class="col-sm-4 control-label">Designation</label>
+    	<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-building"></i> </span>
+		 </div>
+        <input name="designationEng" class="form-control" placeholder="Designation" th:field="*{designationEng}" type="text" required="required">
+    	
+    </div> <!-- form-group// -->
+    <div><ul>
+        	<li th:each="err : ${#fields.errors('designationEng')}" th:text="${err}" class="error" />
+   			 </ul></div>
+    <div class="form-group input-group">
+    <label for="firstName" class="col-sm-4 control-label">Posting from date</label>
+    	<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-calendar"></i> </span>
+		 </div>
+        <input name="postingFromDate" class="form-control" placeholder="Posting From date" th:field="*{postingFromDate}" type="date" required="required">
+   
+    </div> <!-- form-group// -->
+    <div> <ul>
+        	<li th:each="err : ${#fields.errors('postingFromDate')}" th:text="${err}" class="error" />
+   			 </ul>
+   			 </div>
+    <div class="form-group input-group">
+    <label for="firstName" class="col-sm-4 control-label">Posting to date</label>
+    	<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-calendar"></i> </span>
+		 </div>
+        <input name="postingToDate" class="form-control" placeholder="Posting to date" th:field="*{postingToDate}" type="date" required="required">
+   
+    </div> <!-- form-group// -->
+    <div> <ul>
+        	<li th:each="err : ${#fields.errors('postingToDate')}" th:text="${err}" class="error" />
+   			 </ul></div>
+   
+   
+    <div class="form-group input-group">
+    <label for="firstName" class="col-sm-4 control-label">Password</label>
+    	<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+		</div>
+        <input name="password" class="form-control" placeholder="Create password" th:field="*{password}" type="password" required="required">
+    </div> <!-- form-group// -->
+   <div class="form-group input-group">
+    <label for="firstName" class="col-sm-4 control-label">Password</label>
+    	<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+		</div>
+        <input name="confirmpassword" class="form-control" placeholder="Create password"  type="password" required="required">
+    </div><!-- form-group// -->  
+                                  
+    <div class="form-group">
+        <button type="submit" class="btn btn-info btn-block"> Create Account  </button>
+    </div> <!-- form-group// -->      
+    <p class="text-center">Have an account? <a th:href="@{/login}">Log In</a> </p>                                                                 
+</form>
+
+</div> 
+
+
+
+</body>
+</html>

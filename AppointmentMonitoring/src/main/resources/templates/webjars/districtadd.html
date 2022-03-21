@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" 
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="_layout">
+
+<body>
+
+ <div layout:fragment="content">
+    
+<div id="main" class="container-fluid">
+
+  <h2 class="form-heading">Create New Districts</h2>
+  <p></p>
+  
+  <form th:action="@{/AddDistrict}" th:object="${district}" method="post">
+  
+  <div class="row justify-content-center">
+ 		 <div class="form-group col-4" style="display: none;">
+  			<label id="lbl_Id" class="control-label">Id</label>
+  		 </div>
+   		 <div class=" col-4" style="display: none;">
+  			 <input id="id" type="number" th:field="*{districtId}" class="form-control">
+   		</div>
+  	</div>
+    <div class="row justify-content-center">
+    	<div class="form-group col-4">
+    		<label for="DistrictNameEng" id="lbl_DistrictNameEng" class="control-label">District Name(Eng)</label>
+   		 </div> 
+    	<div class=" col-4">
+    	<input id="DistrictNameEng" name="DistrictNameEng" type="text" th:field="*{districtNameEng}"  required="required" class="form-control">
+    	</div>
+    </div> 
+     <div class="row justify-content-center">
+    	<div class="form-group col-4">
+    		<label for="DistrictNameMal" id="lbl_DistrictNameMal" class="control-label">District Name(Mal)</label>
+   		 </div> 
+    	<div class=" col-4">
+    	<input id="DistrictNameMal" name="DistrictNameMal" type="text" th:field="*{districtNameMal}"  required="required" class="form-control">
+    	</div>
+    </div> 
+    <div class="row justify-content-center">
+    <div class="form-group col-4">
+    <label for="Districtcode" id="lbl_Districtcode" class="control-label">District Code</label>
+    </div> 
+    <div class=" col-4">
+    <input id="Districtcode" name="Districtcode"  th:field="*{districtCode}"  type="text" class="form-control" >
+    </div>
+    </div>
+    
+    <div class="row justify-content-center">
+    <div class=" col-sm-12 text-center">
+    <input type="submit" value="Create" class="btn btn-primary">
+     <a th:href="@{/districtlist}" class="btn btn-danger btn-md center-block"> Cancel </a>
+     </div>
+     </div>
+    
+    
+     
+ </form>
+    
+  
+  </div>
+  
+</div>
+
+     
+</body>
+
+</html>

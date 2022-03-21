@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" 
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{_layout}">
+
+<body>
+
+ <div layout:fragment="content">
+
+<div id="main" class="container-fluid">
+
+  <h2 class="form-heading"> Edit Users </h2>
+  <p></p>
+  
+  <form th:action="@{/employeeUpdate}" th:object="${employee}" th:method="put" th:each = "districtCode: ${districtCode}">
+  
+  <div class="row justify-content-center">
+ 		 <div class="form-group col-4" style="display: none;">
+  			<label id="lbl_employeeCode" class="control-label">Employee Code</label>
+  		 </div>
+   		 <div class=" col-4">
+  			 <input id="employeeCode" type="number" th:field="${employee.employeeCode}" class="form-control">
+   		</div>
+  	</div>
+  	 <div class="row justify-content-center">
+    <div class="form-group col-4">
+    <label for="lbl_employeeNameEng" id="lbl_employeeNameEng" class="control-label">Employee Name</label>
+    </div> 
+    <div class=" col-4">
+    <input id="employeeNameEng" name="employeeNameEng" type="text"  th:field="${employee.employeeNameEng}" class="form-control" >
+    <ul>
+        	<li th:each="err : ${#fields.errors('employeeNameEng')}" th:text="${err}" class="error" />
+   			 </ul>
+    </div>
+    </div>
+    
+    <div class="row justify-content-center">
+    	<div class="form-group col-4">
+    		<label for="lbl_designationEng" id="lbl_designationEng" class="control-label">Designation</label>
+   		 </div> 
+    	<div class=" col-4">
+    	<input id="designationEng" name="designationEng" type="text" th:field="${employee.designationEng}"   class="form-control">
+    	<ul>
+        	<li th:each="err : ${#fields.errors('designationEng')}" th:text="${err}" class="error" />
+   			 </ul>
+    	</div>
+    </div> 
+     <div class="row justify-content-center">
+    	<div class="form-group col-4">
+    		<label for="lbl_districtId" id="lbl_districtId" class="control-label">District</label>
+   		 </div> 
+    	<div class=" col-4">
+    	<select name="districtId" id="districtId" class="form-control"  required>
+    		<option  selected th:each="selectedDistrict : ${selectedDistrict}" value="${district.districtId}"th:text="${districtCode} + '-' + ${selectedDistrict}"></option>
+    		<option th:each="district : ${districtlist}" 
+    				th:text="${district.districtCode}+ '-' +${district.districtNameEng}" 
+    				th:unless="${district.districtNameEng == selectedDistrict}"
+    				th:value="${district.districtId}" ></option>
+     		
+ 			</select>
+    
+    	</div>
+    </div> 
+     <div class="row justify-content-center">
+    	<div class="form-group col-4">
+    		<label for="lbl_postingFromDate" id="lbl_postingFromDate" class="control-label">Posting From Date</label>
+   		 </div> 
+    	<div class=" col-4">
+    	<input id="postingFromDate" name="postingFromDate" type="date" th:field="${employee.postingFromDate}"  class="form-control">
+    	<ul>
+        	<li th:each="err : ${#fields.errors('postingFromDate')}" th:text="${err}" class="error" />
+   			 </ul>
+    	</div>
+    </div> 
+     <div class="row justify-content-center">
+    	<div class="form-group col-4">
+    		<label for="lbl_postingToDate" id="lbl_postingToDate" class="control-label">Posting To Date</label>
+   		 </div> 
+    	<div class=" col-4">
+    	<input id="postingToDate" name="postingToDate" type="date" th:field="${employee.postingToDate}"  class="form-control">
+    	<ul>
+        	<li th:each="err : ${#fields.errors('postingToDate')}" th:text="${err}" class="error" />
+   			 </ul>
+    	</div>
+    </div> 
+   
+    <div class="row justify-content-center">
+    <div class=" col-sm-12 text-center">
+   	 <input type="submit" value="Update" class="btn btn-primary">
+     <a th:href="@{/employeelist}" class="btn btn-danger btn-md center-block"> Cancel </a>
+     </div>
+     </div>
+    
+    
+     
+ </form>
+    
+  
+  
+  </div>
+</div>
+
+     
+</body>
+
+</html>

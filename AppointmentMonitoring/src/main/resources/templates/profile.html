@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" 
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{_layout}">
+     <head>
+     <style>
+     
+     table .action
+{
+    width:auto;
+    text-align:right;
+    white-space: nowrap
+}
+table .content { 
+    width: 100% 
+}
+
+
+     .tbl{
+      margin-left: auto;
+  	margin-right: auto;
+    vertical-align: middle;
+     border-collapse:collapse;
+    border-spacing:0;
+    width:100%;
+    border: 1px solid
+   
+     }
+     th{
+        color: darkblue;
+     }
+     td, th{
+     text-align : left;
+    
+     }
+     </style>
+     </head> 
+<body>
+
+<div layout:fragment="content">
+
+<div class="container-fluid">
+                <div class="col-md-12"></div> <br>
+<!--                 <span style="color: orange;">WELCOME</span> -->
+                <h1><span style="color: orange;" th:text="WELCOME"></span>&nbsp;<span th:text="${#strings.toUpperCase(employee.getEmployeeNameEng())}"></span></h1>
+<!--                  <h1  th:text='|WELCOME ${users.getUsername()}|'>  </h1> <br> -->
+                <div class="container">
+                <table class="table tbl table-striped table-responsive-sm"  >
+                <thead>
+						    <tr>
+						      <th scope="row">Employee Code</th>
+						      <td th:text="${users.getEmployeeCode()}"></td>
+						      
+						    </tr>
+						  </thead>
+						  <tbody>
+						    <tr>
+						      <th  scope="row">Employee Name</th>
+						      <td th:text="${employee.getEmployeeNameEng()}"></td>
+						    </tr>
+						    <tr>
+						    <!-- <img src='' alt="Your Image" id="profileimage"> --> 
+						     </tr>
+						    <tr>
+						      <th scope="row">Employee Designation</th>
+						      <td th:text="${employee.getDesignationEng()}"></td>
+						      
+						     
+						    </tr>
+						    <tr>
+						      <th scope="row">Employee District</th>
+						      <td th:text="${employee.getDistrictId().districtNameEng}"></td>
+						      
+						    </tr>
+						     <tr>
+						      <th scope="row">Posting From Date</th>
+						      <td th:text="${#dates.format(employee.getPostingFromDate(),'dd-MM-YYYY')}" ></td>
+						      
+						    </tr>
+						     <tr>
+						      <th scope="row">Posting To Date</th>
+						      <td th:text="${#dates.format(employee.getPostingToDate(),'dd-MM-YYYY')}"></td>
+						      
+						    </tr>
+						  
+						  
+						  </tbody>
+						                
+                
+                
+                </table>
+                 <div><button type="button" class="btn btn-primary form-heading" th:onclick="|window.location.href='/editprofile/${users.getEmployeeCode()}'|" style="display: block; margin: auto;width: 100%;" > Edit Your Profile</button></div>
+           </div>
+
+           		 </div>
+
+</div>
+
+</body>
+
+</html>

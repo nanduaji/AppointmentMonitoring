@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" 
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{_layout}">
+
+<body>
+
+ <div layout:fragment="content">
+
+<div id="main" class="container-fluid">
+
+  <h2 class="form-heading"> Edit District </h2>
+  <p></p>
+  
+  <form th:action="@{/districtUpdate}" th:object="${district}" th:method="put">
+  
+  <div class="row justify-content-center">
+ 		 <div class="form-group col-4" style="display: none;">
+  			<label id="lbl_districtId" class="control-label">Id</label>
+  		 </div>
+   		 <div class=" col-4" style="display: none;">
+  			 <input id="districtId" type="number" th:field="${district.districtId}" class="form-control">
+   		</div>
+  	</div>
+  	 <div class="row justify-content-center">
+    <div class="form-group col-4">
+    <label for="Districtcode" id="lbl_Districtcode" class="control-label">District Code</label>
+    </div> 
+    <div class=" col-4">
+    <input id="Districtcode" name="Districtcode" type="text"  th:field="${district.districtCode}" class="form-control" >
+    <ul>
+        <li th:each="err : ${#fields.errors('districtCode')}" th:text="${err}" class="error" />
+   		</ul>
+    </div>
+    
+    </div>
+    
+    <div class="row justify-content-center">
+    	<div class="form-group col-4">
+    		<label for="DistrictNameEng" id="lbl_DistrictNameEng" class="control-label">District Name(Eng)</label>
+   		 </div> 
+    	<div class=" col-4">
+    	<input id="DistrictNameEng" name="DistrictNameEng" type="text" th:field="${district.districtNameEng}"   class="form-control">
+    	<ul>
+        	<li th:each="err : ${#fields.errors('districtNameEng')}" th:text="${err}" class="error" />
+   			 </ul>
+    	</div>
+    </div> 
+     <div class="row justify-content-center">
+    	<div class="form-group col-4">
+    		<label for="DistrictNameMal" id="lbl_DistrictNameMal" class="control-label">District Name(Mal)</label>
+   		 </div> 
+    	<div class=" col-4">
+    	<input id="DistrictNameMal" name="DistrictNameMal" type="text" th:field="${district.districtNameMal}"  class="form-control">
+    	<ul>
+        	<li th:each="err : ${#fields.errors('districtNameMal')}" th:text="${err}" class="error" />
+   			 </ul>
+    	</div>
+    	
+    </div> 
+   
+    <div class="row justify-content-center">
+    <div class=" col-sm-12 text-center">
+   	 <input type="submit" value="Update" class="btn btn-primary">
+     <a th:href="@{/districtlist}" class="btn btn-danger btn-md center-block"> Cancel </a>
+     </div>
+     </div>
+    
+    
+     
+ </form>
+    
+  
+  
+  </div>
+</div>
+
+     
+</body>
+
+</html>

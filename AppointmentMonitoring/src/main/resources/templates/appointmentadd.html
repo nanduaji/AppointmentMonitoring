@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" 
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{_layout}">
+
+<body>
+
+ <div layout:fragment="content">
+    
+<div id="main" class="container-fluid">
+
+  <h2 class="form-heading">Create New Appointments</h2>
+  <p></p>
+  
+  <form th:action="@{/AddAppointment}" th:object="${appointment}" method="post">
+  
+  <div class="row justify-content-center">
+ 		 <div class="form-group col-4" style="display: none;">
+  			<label id="lbl_Id" class="control-label">Appointment Number</label>
+  		 </div>
+   		 <div class=" col-4" style="display: none;">
+  			 <input id="id" type="number" th:field="*{appointmentNumber}" class="form-control">
+   		</div>
+  	</div>
+  	
+    <div class="row justify-content-center">
+    	<div class="form-group col-4">
+    		<label for="FromDate" id="lbl_FromDate" class="control-label">From Date</label>
+   		 </div> 
+    	<div class=" col-4">
+    	<input id="FromDate" name="FromDate" type="date" th:field="*{fromDate}"  required="required" class="form-control">
+    	</div>
+    </div> 
+    <div class="row justify-content-center">
+    	<div class="form-group col-4">
+    		<label for="FromTime" id="lbl_FromTime" class="control-label">From time</label>
+   		 </div> 
+    	<div class=" col-4">
+    	<input id="FromTime" name="FromTime" type="time" th:field="*{fromTime}"  required="required" class="form-control">
+    	
+    	</div>
+    </div> 
+     <div class="row justify-content-center">
+    	<div class="form-group col-4">
+    		<label for="toDate" id="lbl_toDate" class="control-label">To Date</label>
+   		 </div> 
+    	<div class=" col-4">
+    	<input id="toDate" name="toDate" type="date" th:field="*{toDate}"  required="required" class="form-control">
+    	</div>
+    </div> 
+    
+    <div class="row justify-content-center">
+    	<div class="form-group col-4">
+    		<label for="toTime" id="lbl_toTime" class="control-label">To Time</label>
+   		 </div> 
+    	<div class=" col-4">
+    	<input id="toTime" name="toTime" type="time" th:field="*{toTime}"  required="required" class="form-control">
+    	
+    	</div>
+    </div> 
+    
+    <div class="row justify-content-center">
+    <div class="form-group col-4">
+    <label for="Agenda" id="lbl_Agenda" class="control-label">Agenda</label>
+    </div> 
+    <div class=" col-4">
+    <input id="Agenda" name="Agenda"  th:field="*{agenda}"  type="text" class="form-control" >
+     <ul>
+        	<li th:each="err : ${#fields.errors('agenda')}" th:text="${err}" class="error" />
+   			 </ul>
+    </div>
+    </div>
+    
+    <div class="row justify-content-center">
+    <div class="form-group col-4">
+    <label for="MeetingDescription" id="lbl_MeetingDescription" class="control-label">Meeting Description</label>
+    </div> 
+    <div class=" col-4">
+    <textarea rows="4" cols="50" id="MeetingDescription" name="MeetingDescription"  th:field="*{meetingDescription}"  type="text" class="form-control" ></textarea>
+    
+    </div>
+    </div>
+    <br/>
+    
+    <div class="row justify-content-center">
+    <div class=" col-sm-12 text-center">
+    <input type="submit" value="Create" class="btn btn-primary">
+     <a th:href="@{/appointmentlist}" class="btn btn-danger btn-md center-block"> Cancel </a>
+     </div>
+     </div>
+    
+    
+     
+ </form>
+    
+  
+  </div>
+  
+</div>
+
+     
+</body>
+
+</html>

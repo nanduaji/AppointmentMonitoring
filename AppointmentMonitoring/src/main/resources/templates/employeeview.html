@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" 
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{_layout}">
+
+<body>
+
+ <div layout:fragment="content">
+
+<div id="main" class="container-fluid">
+
+  <h2 class="form-heading"> Employee Details</h2>
+  <p></p>
+  
+  <form  th:object="${employee}" method="POST">
+  
+  <div class="row justify-content-center">
+ 		 <div class="form-group col-4" >
+  			<label id="lbl_employeeCode" class="control-label"> Employee Code</label>
+  		 </div>
+   		 <div class=" col-4">
+  			 <input name="employeeCode" id="employeeCode" type="number" disabled="disabled" th:field="${employee.employeeCode}" class="form-control">
+   		</div>
+  	</div>
+  	 <div class="row justify-content-center">
+    <div class="form-group col-4">
+    <label for="employeeNameEng" id="lbl_employeeNameEng" class="control-label">Employee Name</label>
+    </div> 
+    <div class=" col-4">
+    <input id="employeeNameEng" name="employeeNameEng" type="text" disabled="disabled" th:field="${employee.employeeNameEng}" class="form-control" >
+    </div>
+    </div>
+    
+    <div class="row justify-content-center">
+    	<div class="form-group col-4">
+    		<label for="designationEng" id="lbl_designationEng" class="control-label">Designation</label>
+   		 </div> 
+    	<div class=" col-4">
+    	<input id="designationEng" name="designationEng" type="text" th:field="${employee.designationEng}"  disabled="disabled" class="form-control">
+    	</div>
+    </div> 
+     <div class="row justify-content-center">
+    	<div class="form-group col-4">
+    		<label for="districtId" id="lbl_districtId" class="control-label">District</label>
+   		 </div> 
+    	<div class=" col-4">
+    	<input id="districtId" name="districtId" type="text" th:field="${employee.districtId.districtNameEng}" disabled="disabled" class="form-control">
+    	</div>
+    </div> 
+    
+     <div class="row justify-content-center">
+    <div class="form-group col-4">
+    <label for="employeeNameEng" id="lbl_employeeNameEng" class="control-label">Posting From Date</label>
+    </div> 
+    <div class=" col-4">
+    <input id="employeeNameEng" name="employeeNameEng" type="text" disabled="disabled" th:field="${employee.postingFromDate}" class="form-control" >
+    </div>
+    </div>
+    
+     <div class="row justify-content-center">
+    <div class="form-group col-4">
+    <label for="employeeNameEng" id="lbl_employeeNameEng" class="control-label">Posting To Date</label>
+    </div> 
+    <div class=" col-4">
+    <input id="employeeNameEng" name="employeeNameEng" type="text" disabled="disabled" th:field="${employee.postingToDate}" class="form-control" >
+    </div>
+    </div>
+   
+    <div class="row justify-content-center">
+    <div class=" col-sm-12 text-center">
+   
+     <a th:href="@{/employeelist}" class="btn btn-danger btn-md center-block"> Cancel </a>
+     </div>
+     </div>
+    
+    
+     
+ </form>
+    
+  
+  
+  </div>
+</div>
+
+     
+</body>
+
+</html>

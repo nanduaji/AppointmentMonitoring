@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en" 
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{_layout}">
+<head>
+<style>
+img {
+  border-radius: 50%;
+}
+</style>
+
+<script>
+
+var linkimage = '';
+  var setPhoto = function(event) {
+	
+    var output = document.getElementById('image');
+    output.src = URL.createObjectURL(event.target.files[0]);
+    output.onload = function() {
+      URL.revokeObjectURL(output.src)
+    }
+    linkimage = output.src;
+    console.log(linkimage);
+    document.getElementById("image").src = linkimage;
+    localStorage.setItem("image", linkimage);	
+    $.ajax({
+        type : "PUT",
+        url : "@{/employeeUpdate}",
+        data : {
+            image : localStorage.getItem('image'),
+
+        },
+        success : function(result) {
+            console.log("RESULT" + result)
+            }
+    });
+   
+  };
+</script>
+</head>
+<body>
+
+ <div layout:fragment="content">
+
+<div id="main" class="container-fluid">
+
+  <h2 class="form-heading"> Edit Profile </h2>
+  <p></p>
+  
+  <form th:action="@{/employeeUpdate}" th:object="${employee}" th:method="put" >
+  
+  
+  <div class="row justify-content-center">
+ 		 <div class="form-group col-4" style="display: none;">
+  			<label id="lbl_employeeCode" class="control-label">Employee Code</label>
+  		 </div>
+   		 <div class=" col-4" style="display: none;">
+  			 <input id="employeeCode" type="number" th:field="${employee.employeeCode}" class="form-control">
+   		</div>
+  	</div>
+  	 <div class="row justify-content-center">
+    <div class="form-group col-4">
+    <label for="lbl_employeeNameEng" id="lbl_employeeNameEng" class="control-label">Employee Name</label>
+    </div> 
+    <div class=" col-4">
+    <input id="employeeNameEng" name="employeeNameEng" type="text"  th:field="${employee.employeeNameEng}" class="form-control" >
+    </div>
+    </div>
+    
+    <div class="row justify-content-center">
+    	<div class="form-group col-4">
+    		<label for="lbl_designationEng" id="lbl_designationEng" class="control-label">Designation</label>
+   		 </div> 
+    	<div class=" col-4">
+    	<input id="designationEng" name="designationEng" type="text" th:field="${employee.designationEng}"   class="form-control">
+    	</div>
+    </div> 
+     <div class="row justify-content-center">
+    	<div class="form-group col-4">
+    		<label for="lbl_districtId" id="lbl_districtId" class="control-label">District</label>
+   		 </div> 
+    	<div class=" col-4" >
+    	<select name="districtId" id="districtId" class="form-control"  required>
+    		  <option  id="selectedDistrict" selected th:each="selectedDistrict : ${selectedDistrict}" th:value="${districtId}" th:text="${districtCode} + '-' + ${selectedDistrict}"></option>
+    		     <option  id="${district.districtId}" th:each="district : ${districtlist}" 
+    		  
+    				th:text="${district.districtCode}+ '-' +${district.districtNameEng}" 
+    				th:unless="${district.districtNameEng == selectedDistrict}"
+    				th:value="${district.districtId}" ></option>
+ 			</select>
+    
+    	</div>
+    </div> 
+     <div class="row justify-content-center">
+    	<div class="form-group col-4">
+    		<label for="lbl_postingFromDate" id="lbl_postingFromDate" class="control-label">Posting From Date</label>
+   		 </div> 
+    	<div class=" col-4">
+    	<input id="postingFromDate" name="postingFromDate" type="date" th:field="${employee.postingFromDate}"  class="form-control">
+    	</div>
+    </div> 
+     <div class="row justify-content-center">
+    	<div class="form-group col-4">
+    		<label for="lbl_postingToDate" id="lbl_postingToDate" class="control-label">Posting To Date</label>
+   		 </div> 
+    	<div class=" col-4">
+    	<input id="postingToDate" name="postingToDate" type="date" th:field="${employee.postingToDate}"  class="form-control">
+    	</div>
+    </div> 
+     <div class="row justify-content-center">
+     <br/><br/>
+     <div class="form-group col-4" style="display:none">
+    		<label for="lbl_uploadphoto" id="lbl_uploadphoto" class="control-label" >Upload Your Photo</label>
+   		 </div> 
+   		 
+   		 <div class="form-group col-4" style="display:none">
+    		<input type="file" id="myFile" name="filename" value="uploadedimage" onChange="setPhoto(event)">
+    		<img src='' alt="Uploaded Image" id="image" width="200" height="200">
+   		 </div> 
+    	
+    	</div>
+   
+    <div class="row justify-content-center">
+    <div class=" col-sm-12 text-center">
+   	 <input type="submit" value="Update" class="btn btn-primary">
+     <a th:href="@{/profile}" class="btn btn-danger btn-md center-block"> Cancel </a>
+     </div>
+     </div>
+    
+    
+     
+ </form>
+ 
+  
+  </div>
+</div>
+
+    
+</body>
+
+</html>

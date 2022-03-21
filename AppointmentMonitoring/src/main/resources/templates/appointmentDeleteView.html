@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" 
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{_layout}">
+
+<body>
+
+ <div layout:fragment="content">
+
+<div id="main" class="container-fluid">
+
+  <h2 class="form-heading"> Appointment Details</h2>
+  <p></p>
+  
+  <form  th:object="${appointment}" th:method="DELETE">
+  
+     
+ <div class="row justify-content-center" style="display:none">
+ 		 <div class="form-group col-4" >
+  			<label id="lbl_Id" class="control-label">Appointment Number</label>
+  		 </div>
+   		 <div class=" col-4" >
+  			 <input id="id" type="number" th:field="${appointment.appointmentNumber}" class="form-control">
+   		</div>
+  	</div>
+  	<div class="row justify-content-center" style="display:none">
+    	<div class="form-group col-4">
+    		<label for="employeeCode" id="lbl_employeeCode" class="control-label">Employee Code</label>
+   		 </div> 
+    	<div class=" col-4">
+    	<input id="employeeCode" name="employeeCode" type="text" th:field="${appointment.employeeCode}" disabled="disabled" class="form-control">
+    	</div>
+    </div> 
+  	
+  	 <div class="row justify-content-center">
+    <div class="form-group col-4">
+    <label for="fromDate" id="lbl_fromDate" class="control-label">From Date</label>
+    </div> 
+    <div class=" col-4">
+    <input id="fromDate" name="fromDate" type="date"  th:field="${appointment.fromDate}" class="form-control" disabled="disabled">
+    </div>
+    </div>
+    
+     <div class="row justify-content-center">
+    	<div class="form-group col-4">
+    		<label for="FromTime" id="lbl_FromTime" class="control-label">From time</label>
+   		 </div> 
+    	<div class=" col-4">
+    	<input id="FromTime" name="FromTime" type="time" th:field="${appointment.fromTime}"  disabled="disabled" class="form-control">
+    	</div>
+    </div> 
+    
+    <div class="row justify-content-center">
+    	<div class="form-group col-4">
+    		<label for="toDate" id="lbl_toDate" class="control-label">To Date </label>
+   		 </div> 
+    	<div class=" col-4">
+    	<input id="toDate" name="toDate" type="date" th:field="${appointment.toDate}"  class="form-control" disabled="disabled">
+    	</div>
+    </div> 
+    
+     <div class="row justify-content-center">
+    	<div class="form-group col-4">
+    		<label for="toTime" id="lbl_toTime" class="control-label">To Time</label>
+   		 </div> 
+    	<div class=" col-4">
+    	<input id="toTime" name="toTime" type="time" th:field="${appointment.toTime}" disabled="disabled" required="required" class="form-control">
+    	</div>
+    </div> 
+    
+     <div class="row justify-content-center">
+    	<div class="form-group col-4">
+    		<label for="meetingDescription" id="lbl_meetingDescription" class="control-label">Meeting Description</label>
+   		 </div> 
+    	<div class=" col-4">
+    	<input id="meetingDescription" name="meetingDescription" type="text" th:field="${appointment.meetingDescription}" disabled="disabled" class="form-control">
+    	</div>
+    </div> 
+    
+    <div class="row justify-content-center">
+    	<div class="form-group col-4">
+    		<label for="agenda" id="lbl_agenda" class="control-label">Agenda</label>
+   		 </div> 
+    	<div class=" col-4">
+    	<input id="agenda" name="agenda" type="text" th:field="${appointment.agenda}"  class="form-control" disabled="disabled">
+    	</div>
+    </div> 
+   
+    <div class="row justify-content-center">
+    <div class=" col-sm-12 text-center">
+    
+   	  <button type="button" name="Delete" value="Delete" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal1"> Delete </button>
+ 
+     <a th:href="@{/appointmentlist}" class="btn btn-primary btn-md center-block"> Cancel </a>
+     
+     </div>
+     </div>
+    
+   <div>
+    <th:block th:replace="_appointmentDeleteModal ::  modal(id ='exampleModal1',appointmentNumber = ${appointment.get().appointmentNumber}) ">modal</th:block>
+   </div>
+     
+ </form>
+    
+  
+  
+  </div>
+</div>
+
+     
+</body>
+
+</html>
